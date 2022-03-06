@@ -39,15 +39,12 @@ public class RaceAppl {
 		Runner[] runners = new Runner[nThreads];
 		startRunners(runners, race);
 		joinRunners(runners);
-		displayWinner(race);
+		
 		displayResultsTable(race);
 		
 	}
 
-	private static void displayWinner(Race race) {
-		System.out.println("Congratulations to runner " + race.getWinner());
-		
-	}
+	
 
 	private static void joinRunners(Runner[] runners) {
 		IntStream.range(0, runners.length).forEach(i -> {
