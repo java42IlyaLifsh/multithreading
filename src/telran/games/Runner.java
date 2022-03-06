@@ -1,10 +1,16 @@
 package telran.games;
 
+import java.time.Instant;
+
 import telran.games.dto.Race;
 
 public class Runner extends Thread {
 private Race race;
 private int runnerId;
+private Instant finishTime;
+public int getRunnerId() {
+	return runnerId;
+}
 public Runner(Race race, int runnerId) {
 	this.race = race;
 	this.runnerId = runnerId;
@@ -22,6 +28,18 @@ public void run() {
 		}
 		System.out.println(runnerId);
 	}
+	synchronized (race) {
+		finishTime = Instant.now();
+		finishRace();
+	}
+}
+private void finishRace() {
 	race.setWinner(runnerId);
+
+	race.getResultsTable().add(this);
+
+}
+public Instant getFinsishTime() {
+	return finishTime;
 }
 }

@@ -1,5 +1,9 @@
 package telran.games.controller;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import telran.games.dto.Race;
@@ -31,11 +35,13 @@ public class RaceAppl {
 	static void startGame(InputOutput io) {
 		int nThreads = io.readInt("Enter number of the runners", 2, MAX_THREADS);
 		int distance = io.readInt("Enter distance", MIN_DISTANCE, MAX_DISTANCE);
-		Race race = new Race(distance, MIN_SLEEP, MAX_SLEEP);
+		Race race = new Race(distance, MIN_SLEEP, MAX_SLEEP, new ArrayList<Runner>(), Instant.now());
 		Runner[] runners = new Runner[nThreads];
 		startRunners(runners, race);
 		joinRunners(runners);
 		displayWinner(race);
+		displayResultsTable(race);
+		
 	}
 
 	private static void displayWinner(Race race) {
@@ -61,5 +67,26 @@ public class RaceAppl {
 		});
 		
 	}
+	
+
+private static void displayResultsTable(Race race) {
+	System.out.println("Congratulations to runner " + race.getWinner());
+	System.out.println("place\tracer number\ttime");
+	List<Runner> resultsTable = race.getResultsTable();
+	IntStream.range(0, resultsTable.size()).mapToObj(i ->  toPrintedString(i, race))
+	.forEachOrdered(System.out::println);
+	int nResults = resultsTable.size();
+	for(int i = 1; i < nResults; i++) {
+		if (resultsTable.get(i).getFinsishTime().isBefore(resultsTable.get(i-1).getFinsishTime()) ) {
+			System.out.println(i);
+		}
+	}
+	
+}
+private static String toPrintedString(int index, Race race) {
+	Runner runner = race.getResultsTable().get(index);
+	return String.format("%3d\t%7d\t\t%d", index + 1, runner.getRunnerId(),
+			ChronoUnit.MILLIS.between(race.getStartTime(), runner.getFinsishTime()));
+}
 
 }
