@@ -1,4 +1,4 @@
-package telran.kolhoz;
+package telran.kolhoz.synch;
 
 public class Truck extends Thread {
 private static long elevator1;

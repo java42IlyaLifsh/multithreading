@@ -5,6 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Stream;
 
+import telran.kolhoz.atomic.Truck;
+
+//import telran.kolhoz.synch.Truck;
+
 public class KolhozAppl {
 
 	private static final int N_LOADS = 100000;
