@@ -1,7 +1,9 @@
 package telran.games.dto;
+//IlyaL-46
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import telran.games.Runner;
 
@@ -9,7 +11,9 @@ public class Race {
 	private int distance;
 	private int minSleep;
 	private int maxSleep;
-	private int winner = -1;
+	private final int WIN_INITIAL=-1;
+	private int winner = WIN_INITIAL;
+	private AtomicInteger atomicWinner= new AtomicInteger(WIN_INITIAL);
 	private List<Runner> resultsTable;
 	private Instant startTime;
 	
@@ -29,6 +33,16 @@ public class Race {
 	public int getWinner() {
 		return winner;
 	}
+	
+	public int getAtomicWinner() {
+		return atomicWinner.get();
+	}
+	
+	public void setAtomicWinner(int winnerID) {
+		atomicWinner.compareAndSet(WIN_INITIAL, winnerID);
+	}
+	
+	
 	public void setWinner(int winner) {
 		if (this.winner == -1) {
 			this.winner = winner;

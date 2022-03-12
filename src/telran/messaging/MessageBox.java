@@ -1,4 +1,6 @@
 package telran.messaging;
+//IlyaL-46
+
 
 public class MessageBox {
 private String text;
@@ -12,6 +14,8 @@ public synchronized void setText(String text) {
 	}
 	this.text = text;
 	this.notify();
+//	this.notifyAll();
+
 }
 public synchronized String getText() throws InterruptedException {
 	while (text == null) {
@@ -19,9 +23,11 @@ public synchronized String getText() throws InterruptedException {
 	}
 	String res = text;
 	text = null;
+	this.notifyAll();
 	return res;
 }
 public synchronized String pullText() {
 	return text;
 }
 }
+

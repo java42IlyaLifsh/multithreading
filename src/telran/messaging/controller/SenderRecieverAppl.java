@@ -1,5 +1,5 @@
 package telran.messaging.controller;
-
+//IlyaL-46
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,7 +19,8 @@ public class SenderRecieverAppl {
 				.limit(N_RECIEVERS).toList();
 		recievers.forEach(Reciever::start);
 		sender.start();
-		Thread.sleep(100);
+//		Thread.sleep(100);
+		recievers.forEach(thr -> thr.interrupt());
 		
 
 	}

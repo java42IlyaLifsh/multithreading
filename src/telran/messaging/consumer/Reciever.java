@@ -1,5 +1,5 @@
 package telran.messaging.consumer;
-
+//IlyaL-46
 import telran.messaging.MessageBox;
 
 public class Reciever extends Thread {
@@ -8,17 +8,19 @@ public class Reciever extends Thread {
 
 	public Reciever(MessageBox messageBox) {
 		this.messageBox = messageBox;
-		//TODO update code - no daemon 
-		setDaemon(true);
+		// update code - no daemon 
+		setDaemon(false);
 	}
 	@Override
 	public void run() {
-		while(true) {
+		boolean running = true;
+		while(running) {
 			try {
 				String message = messageBox.getText();
 				System.out.printf("%s - %s\n", getName(), message);
 			} catch (InterruptedException e) {
-				// TODO 
+				running = false;
+//				break;
 			}
 		}
 	}

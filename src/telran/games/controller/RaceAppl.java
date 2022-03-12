@@ -1,4 +1,5 @@
 package telran.games.controller;
+//IlyaL-46
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -67,7 +68,9 @@ public class RaceAppl {
 	
 
 private static void displayResultsTable(Race race) {
-	System.out.println("Congratulations to runner " + race.getWinner());
+//	System.out.println("Congratulations to runner " + race.getWinner());
+	System.out.println("Congratulations to runner " + race.getAtomicWinner());
+
 	System.out.println("place\tracer number\ttime");
 	List<Runner> resultsTable = race.getResultsTable();
 	IntStream.range(0, resultsTable.size()).mapToObj(i ->  toPrintedString(i, race))

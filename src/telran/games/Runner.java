@@ -1,5 +1,5 @@
 package telran.games;
-
+//IlyaL-46
 import java.time.Instant;
 
 import telran.games.dto.Race;
@@ -28,14 +28,15 @@ public void run() {
 		}
 		System.out.println(runnerId);
 	}
+	race.setAtomicWinner(runnerId);
 	synchronized (race) {
 		finishTime = Instant.now();
 		finishRace();
 	}
 }
 private void finishRace() {
-	race.setWinner(runnerId);
-
+//	race.setWinner(runnerId);
+	race.setAtomicWinner(runnerId);
 	race.getResultsTable().add(this);
 
 }
