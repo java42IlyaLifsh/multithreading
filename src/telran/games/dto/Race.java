@@ -1,6 +1,7 @@
 package telran.games.dto;
 //IlyaL-46
 
+// V.R. It looks OK
 import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

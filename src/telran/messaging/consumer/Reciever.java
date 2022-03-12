@@ -9,6 +9,9 @@ public class Reciever extends Thread {
 	public Reciever(MessageBox messageBox) {
 		this.messageBox = messageBox;
 		// update code - no daemon 
+		/* V.R. The following line can be skipped because
+		 *  thread's default status is user thread (not daemon)
+		 */
 		setDaemon(false);
 	}
 	@Override
