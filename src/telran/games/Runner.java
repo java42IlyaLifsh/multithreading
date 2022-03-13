@@ -28,9 +28,12 @@ public void run() {
 		}
 		System.out.println(runnerId);
 	}
-	synchronized (race) {
+	try {
+		race.lock.lock();
 		finishTime = Instant.now();
 		finishRace();
+	} finally {
+		race.lock.unlock();
 	}
 }
 private void finishRace() {

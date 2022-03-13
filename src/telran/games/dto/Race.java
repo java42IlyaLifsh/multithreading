@@ -2,6 +2,8 @@ package telran.games.dto;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import telran.games.Runner;
 
@@ -12,6 +14,7 @@ public class Race {
 	private int winner = -1;
 	private List<Runner> resultsTable;
 	private Instant startTime;
+	public Lock lock = new ReentrantLock(true);
 	
 	public List<Runner> getResultsTable() {
 		return resultsTable;
@@ -25,6 +28,7 @@ public class Race {
 		this.maxSleep = maxSleep;
 		this.resultsTable = resultsTable;
 		this.startTime = startTime;
+		
 	}
 	public int getWinner() {
 		return winner;
